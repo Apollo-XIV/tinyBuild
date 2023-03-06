@@ -1,0 +1,19 @@
+name: push-to-dev
+on:
+  push:
+    branches:
+      - dev
+jobs:
+  Copy-branch-to-worker:
+    name: Copy Branch to Worker
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3.3.0
+      - name: Install SSH Key
+        # You may pin to the exact commit or the version.
+        # uses: shimataro/ssh-key-action@02d189fc92ea6279c0fea0e7a259da1b4f1d22a5
+        uses: shimataro/ssh-key-action@v2.5.0
+        with:
+          key: ${{secrets.SSH_PRIVATE_KEY}}
+          known_hosts: 'temporary-value-to-avoid-errors'
